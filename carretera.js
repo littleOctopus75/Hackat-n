@@ -6,6 +6,7 @@ let cuadroConfiguracion;
 let estadisticas2;
 
 function setup() {
+<<<<<<< Updated upstream
   createCanvas(1560, 450); // Lienzo de píxeles
   carretera = new Carretera(2060, 10,0,175,"1"); // Crear una nueva instancia de Carretera con ancho y divisores
   carretera2 = new Carretera(2060, 10,0,280,"2");
@@ -13,6 +14,12 @@ function setup() {
   estadisticas = new Estadisticas(10 , 15, carretera);
   estadisticas2 = new Estadisticas(10 , 370, carretera2);
   cuadroConfiguracion = new CuadroConfiguracion(semaforo, carretera);
+=======
+  createCanvas(2060, 400); // Lienzo de píxeles
+  carretera = new Carretera(2060, 10); // Crear una nueva instancia de Carretera con ancho y divisores
+  semaforo = new Semaforo(3000, 5000); // Ejemplo: verde 2 segundos, rojo 1 segundo
+  estadistica = new Estadistica("contenedor-estadistica");
+>>>>>>> Stashed changes
 }
 
 function draw() {
@@ -80,8 +87,13 @@ class Carretera {
         ); 
         this.cantidadCarros++;
         this.verificarSobreposicion(nuevoCarro);
+<<<<<<< Updated upstream
+        // console.log(this.carros.length)
+        this.tiempoUltimoCarro = millis() + random(1000, 3000); // Intervalo de tiempo aleatorio entre 2 y 5 segundos para el próximo carro
+=======
         estadistica.registrarEspera("A", 1000);
         this.tiempoUltimoCarro = millis() + random(2000, 4000); // Intervalo de tiempo aleatorio entre 2 y 5 segundos para el próximo carro
+>>>>>>> Stashed changes
       }
     }
 
