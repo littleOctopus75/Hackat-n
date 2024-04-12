@@ -14,9 +14,7 @@ class Semaforo {
     } else if (this.estado === 'verde') {
       this.cambioColor('rojo');
     }
-  }
-
- 
+  } 
 
   mostrarsemaforo(){
     //Para controlar las posiciones del semaforo}
