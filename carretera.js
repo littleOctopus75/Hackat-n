@@ -3,18 +3,12 @@ let carretera; // Variable para la instancia de la carretera
 function setup() {
   createCanvas(1460, 200); // Lienzo de píxeles
   carretera = new Carretera(1450, 10); // Crear una nueva instancia de Carretera con ancho y divisores
-  // miCarro = new Carro(50, 100, 30);
-  // miCarro2 = new Carro(20, 150, 30);
 }
 
 function draw() {
   background(200); // Fondo blanco
-  carretera.mostrar(); // Mostrar la carretera y sus líneas divisorias
-  //   miCarro.dibujar();
-  // miCarro2.dibujar();
-  
-  // // Actualiza la posición del carro
-  // miCarro.avanzar();
+  carretera.mostrar();
+  carretera.actualizar();
 }
 
 class Carretera {
@@ -23,7 +17,7 @@ class Carretera {
     this.numDivisores = numDivisores;
     this.espacioEntreDivisores = this.ancho / this.numDivisores;
     this.carros = []; // Array para almacenar los carros
-    this.intervaloCarros = 2000; // Intervalo en milisegundos para generar carros
+    this.intervaloCarros = 1000; // Intervalo en milisegundos para generar carros
     this.tamañoCarro = 30; // Tamaño de los carros
     this.tiempoUltimoCarro = 0; // Tiempo en milisegundos del último carro generado
   }
@@ -49,26 +43,30 @@ class Carretera {
   }
 
   actualizar() {
-    // Generar carros aleatorios
-    if (millis() - this.tiempoUltimoCarro > this.intervaloCarros) {
-      let x = random(0, width);
-      let y = height / 2;
-      let nuevoCarro = new Carro(x, y, this.tamañoCarro);
+    // Generar carros aleatorios en posición y tiempo
+    if (millis() - this.tiempoUltimoCarro + 1000 > this.intervaloCarros) {
+      let nuevoCarro = new Carro(0, 80, this.tamañoCarro); // Posición X fija en 0
       this.verificarSobreposicion(nuevoCarro);
-      this.tiempoUltimoCarro = millis();
+      this.tiempoUltimoCarro = millis() + random(1000, 6000); // Intervalo de tiempo aleatorio para el próximo carro
     }
   }
-
+  
   verificarSobreposicion(nuevoCarro) {
     // Verificar que el nuevo carro no se sobreponga con otros carros existentes
     let seSobreponen = false;
     for (let carro of this.carros) {
-      if (abs(nuevoCarro.x - carro.x) < nuevoCarro.tamaño * 3) {
+      // Considerar la distancia horizontal y vertical entre los carros
+      let distanciaHorizontal = abs(nuevoCarro.x - carro.x);
+  
+      // Si la distancia horizontal es menor que el ancho combinado de los carros
+      // y la distancia vertical es menor que el alto combinado de los carros,
+      // entonces se sobreponen
+      if (distanciaHorizontal < (nuevoCarro.tamaño + carro.tamaño)) {
         seSobreponen = true;
         break;
       }
     }
-
+  
     if (!seSobreponen) {
       this.carros.push(nuevoCarro);
     }
