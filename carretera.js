@@ -1,14 +1,17 @@
 let carretera; // Variable para la instancia de la carretera
+let semaforo;
 
 function setup() {
   createCanvas(1460, 200); // Lienzo de píxeles
   carretera = new Carretera(1450, 10); // Crear una nueva instancia de Carretera con ancho y divisores
+  semaforo = new Semaforo(1000, 500); // Ejemplo: verde 2 segundos, rojo 1 segundo
 }
 
 function draw() {
   background(200); // Fondo blanco
   carretera.mostrar();
   carretera.actualizar();
+  semaforo.mostrarsemaforo();
 }
 
 class Carretera {
@@ -41,6 +44,7 @@ class Carretera {
       carro.avanzar();
     }
   }
+   
 
   actualizar() {
     // Generar carros aleatorios en posición y tiempo
