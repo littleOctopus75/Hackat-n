@@ -8,6 +8,7 @@ function setup() {
   createCanvas(1560, 400); // Lienzo de píxeles
   carretera = new Carretera(2060, 10, 0, 175, "izquierda"); // Crear una nueva instancia de Carretera con ancho y divisores
   carretera2 = new Carretera(2060, 10, 0, 280, "derecha");
+  carretera.intervaloCarros=1;
   semaforo = new Semaforo(3000, 2000);
   estadisticas = new Estadisticas(semaforo);
   cuadroConfiguracion = new CuadroConfiguracion(semaforo, carretera);
@@ -37,7 +38,7 @@ class Carretera {
     this.numDivisores = numDivisores;
     this.espacioEntreDivisores = this.ancho / this.numDivisores;
     this.carros = []; // Array para almacenar los carros
-    this.intervaloCarros = 1000; // Intervalo en milisegundos para generar carros
+    this.intervaloCarros = 5; // Intervalo en milisegundos para generar carros
     this.tamañoCarro = 30; // Tamaño de los carros
     this.tiempoUltimoCarro = 0; // Tiempo en milisegundos del último carro generado
     this.maxCarros = 10; // Máximo de carros permitidos

@@ -9,7 +9,7 @@ class Estadisticas {
   }
 
   setTotalCarros(carros){
-   this.carros.push(carros); // Agrega un carro al arreglo carros
+   this.carros=carros; // Agrega un carro al arreglo carros
   }
 
   mostrarEstadisticas() {

@@ -49,8 +49,6 @@ class Carro {
     //para todos los coches creados, se evaluan desde el primero hasta el ultimo, siendo que el primero siempre va a tener el paso libre, a no ser que el semaforo esté en rojo, mientras que los demás carros se verán limitados por el semaforo y por los carros de adelante
 
     if (this.sentido === "izquierda") {
-
-
       for (let i = 0; i < this.carros.length; i++) {
         let carroActual2 = this.carros[i];
         let carroAtras2 = this.carros[i + 1];
@@ -73,14 +71,12 @@ class Carro {
           carroActual2.x < 650
         ) {
           carroActual2.x += carroActual2.velocidad;
-          
+
           carroActual2.tiempoEspera = 0;
         } else {
           carroActual2.tiempoEspera = millis();
         }
       }
-
-
     } else {
       for (let i = 0; i < this.carros.length; i++) {
         let carroActual = this.carros[i];
