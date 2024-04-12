@@ -23,6 +23,7 @@ class Carretera {
     this.intervaloCarros = 1000; // Intervalo en milisegundos para generar carros
     this.tamañoCarro = 30; // Tamaño de los carros
     this.tiempoUltimoCarro = 0; // Tiempo en milisegundos del último carro generado
+    this.maxCarros = 10; // Máximo de carros permitidos
   }
 
   mostrar() {
@@ -38,45 +39,52 @@ class Carretera {
       line(i * this.espacioEntreDivisores, height / 2 - 15, i * this.espacioEntreDivisores, height / 2 + 15);
     }
 
-    // Dibujar y actualizar posición de cada carro
-    for (let carro of this.carros) {
-      carro.dibujar();
-      carro.avanzar();
+     for (let carro of this.carros) {
+      if (carro.x <= width) {
+        carro.dibujar();
+        carro.avanzar();
+      }
     }
   }
    
 
   actualizar() {
     // Generar carros aleatorios en posición y tiempo
-    if (millis() - this.tiempoUltimoCarro + 2000 > this.intervaloCarros) {
-      console.log(semaforo.getEstado);
-      let nuevoCarro = new Carro(0, 190, this.tamañoCarro, semaforo.getEstado); // Posición X fija en 0
-      this.verificarSobreposicion(nuevoCarro);
-      this.tiempoUltimoCarro = millis() + random(6000, 8000); // Intervalo de tiempo aleatorio para el próximo carro
+
+    if (millis() - this.tiempoUltimoCarro > this.intervaloCarros) {
+      if(this.carros.length < this.maxCarros){
+        let nuevoCarro = new Carro(0, 80, this.tamañoCarro); // Posición X fija en 0
+        this.verificarSobreposicion(nuevoCarro);
+        this.tiempoUltimoCarro = millis() + random(2000, 4000); // Intervalo de tiempo aleatorio entre 2 y 5 segundos para el próximo carro
+      }
+
     }
+
+    if (this.carros.length > 0 && this.carros[0].x > 1400) {
+      this.carros.shift(); // Eliminar primer carro de la cola
+    }
+    console.log(this.carros.length)
   }
   
   verificarSobreposicion(nuevoCarro) {
-    // Verificar que el nuevo carro no se sobreponga con otros carros existentes
-    let seSobreponen = false;
-    for (let carro of this.carros) {
-      // Considerar la distancia horizontal y vertical entre los carros
-      let distanciaHorizontal = abs(nuevoCarro.x - carro.x);
-      let distanciaVertical = abs(nuevoCarro.y - carro.y);
-  
-      // Si la distancia horizontal es menor que el ancho combinado de los carros
-      // y la distancia vertical es menor que el alto combinado de los carros,
-      // entonces se sobreponen
-      if (distanciaHorizontal < (nuevoCarro.tamaño + carro.tamaño) &&
-          distanciaVertical < (nuevoCarro.tamaño + carro.tamaño)) {
-        seSobreponen = true;
-        break;
-      }
-    }
-  
-    if (!seSobreponen) {
-      this.carros.push(nuevoCarro);
+
+  // Verificar que el nuevo carro no se sobreponga con el último carro generado
+  let ultimoCarro = this.carros[this.carros.length - 1];
+  if (ultimoCarro) {
+    // Considerar la distancia horizontal y vertical entre los carros
+    let distanciaHorizontal = abs(nuevoCarro.x - ultimoCarro.x);
+    console.log(distanciaHorizontal);
+
+    // Si la distancia horizontal es menor que el ancho combinado de los carros
+    // y la distancia vertical es menor que el alto combinado de los carros,
+    // entonces se sobreponen
+    if (distanciaHorizontal < (nuevoCarro.tamaño + ultimoCarro.tamaño)) {
+      console.log("Se sobreponen");
+      return;
     }
   }
 
+  // Si no se sobreponen, agregar el nuevo carro
+  this.carros.push(nuevoCarro);
+  }
 }
