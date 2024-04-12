@@ -4,7 +4,7 @@ let semaforo;
 function setup() {
   createCanvas(2060, 400); // Lienzo de píxeles
   carretera = new Carretera(2060, 10); // Crear una nueva instancia de Carretera con ancho y divisores
-  semaforo = new Semaforo(3000, 2000); // Ejemplo: verde 2 segundos, rojo 1 segundo
+  semaforo = new Semaforo(3000, 8000); 
 }
 
 function draw() {
