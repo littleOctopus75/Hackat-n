@@ -3,9 +3,10 @@ let miCarro;
 
 
 class Carro {
-  constructor(x, y, tamaño) {
+  constructor(x, y, tamaño, colorSemaforo) {
     this.x = x;
     this.y = y;
+    this.colorSemaforo=colorSemaforo;
     this.tamaño = tamaño;
     this.velocidad = 1;
   }
@@ -19,6 +20,16 @@ class Carro {
     fill(0); // Color negro
     ellipse(this.x + this.tamaño, this.y + this.tamaño / 2, this.tamaño, this.tamaño);
     ellipse(this.x + this.tamaño * 2, this.y + this.tamaño / 2, this.tamaño, this.tamaño);
+    this.validar();
+  }
+
+  validar(){
+    console.log(this.x)
+      console.log(this.colorSemaforo)  
+    if(this.x+100 >= 500 && this.colorSemaforo==='rojo'){
+      
+      this.parar();
+    }
   }
 
   avanzar() {
@@ -26,6 +37,9 @@ class Carro {
     if (this.x > width) {
       this.x = 0;
     }
+  }
+  parar(){
+    this.x = 0;
   }
 }
 

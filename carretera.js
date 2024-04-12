@@ -2,9 +2,9 @@ let carretera; // Variable para la instancia de la carretera
 let semaforo;
 
 function setup() {
-  createCanvas(1460, 200); // Lienzo de píxeles
-  carretera = new Carretera(1450, 10); // Crear una nueva instancia de Carretera con ancho y divisores
-  semaforo = new Semaforo(1000, 500); // Ejemplo: verde 2 segundos, rojo 1 segundo
+  createCanvas(2060, 400); // Lienzo de píxeles
+  carretera = new Carretera(2060, 10); // Crear una nueva instancia de Carretera con ancho y divisores
+  semaforo = new Semaforo(1000, 5000); // Ejemplo: verde 2 segundos, rojo 1 segundo
 }
 
 function draw() {
@@ -48,10 +48,11 @@ class Carretera {
 
   actualizar() {
     // Generar carros aleatorios en posición y tiempo
-    if (millis() - this.tiempoUltimoCarro + 1000 > this.intervaloCarros) {
-      let nuevoCarro = new Carro(0, 80, this.tamañoCarro); // Posición X fija en 0
+    if (millis() - this.tiempoUltimoCarro + 2000 > this.intervaloCarros) {
+      console.log(semaforo.getEstado);
+      let nuevoCarro = new Carro(0, 190, this.tamañoCarro, semaforo.getEstado); // Posición X fija en 0
       this.verificarSobreposicion(nuevoCarro);
-      this.tiempoUltimoCarro = millis() + random(1000, 6000); // Intervalo de tiempo aleatorio para el próximo carro
+      this.tiempoUltimoCarro = millis() + random(6000, 8000); // Intervalo de tiempo aleatorio para el próximo carro
     }
   }
   
@@ -61,11 +62,13 @@ class Carretera {
     for (let carro of this.carros) {
       // Considerar la distancia horizontal y vertical entre los carros
       let distanciaHorizontal = abs(nuevoCarro.x - carro.x);
+      let distanciaVertical = abs(nuevoCarro.y - carro.y);
   
       // Si la distancia horizontal es menor que el ancho combinado de los carros
       // y la distancia vertical es menor que el alto combinado de los carros,
       // entonces se sobreponen
-      if (distanciaHorizontal < (nuevoCarro.tamaño + carro.tamaño)) {
+      if (distanciaHorizontal < (nuevoCarro.tamaño + carro.tamaño) &&
+          distanciaVertical < (nuevoCarro.tamaño + carro.tamaño)) {
         seSobreponen = true;
         break;
       }
@@ -75,4 +78,5 @@ class Carretera {
       this.carros.push(nuevoCarro);
     }
   }
+
 }

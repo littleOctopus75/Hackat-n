@@ -15,33 +15,41 @@ class Semaforo {
       this.cambioColor('rojo');
     }
   }
+
+ 
+
   mostrarsemaforo(){
     //Para controlar las posiciones del semaforo}
     
-    var posicionesX=190;
+    var posicionesX=650;
     var posicionesY=5;
+    var ancho=40;
+    var largo=120;
     // background(255);
     // Dibuja el semáforo
     stroke(0);
     fill(255);
-    rect(posicionesX, posicionesY, 50, 150);
-    line(posicionesX+25, posicionesY+150, posicionesX+25, 300);
+    rect(posicionesX, posicionesY, ancho, largo);
+    line(posicionesX+22, posicionesY+120, posicionesX+22, 170);
     
-    fill(semaforo.estado === 'verde' ?  color(0, 255, 0):color(255, 255, 255) );
-    ellipse(posicionesX+25, posicionesY+30, 50, 50);
+    fill(this.estado === 'verde' ?  color(0, 255, 0):color(255, 255, 255) );
+    ellipse(posicionesX+20, posicionesY+30, ancho, ancho);
     
-    fill(semaforo.estado === 'rojo' ? color(255, 0, 0) : color(255,255,255));
-    ellipse(posicionesX+25, posicionesY+110, 50, 50);
+    fill(this.estado === 'rojo' ? color(255, 0, 0) : color(255,255,255));
+    ellipse(posicionesX+20, posicionesY+90, ancho, ancho);
     this.verificar();
     
     }
     verificar(){
       // Cambia el color del semáforo si ha pasado el tiempo
-    if (millis() - this.tiempoUltimoCambio >= (semaforo.estado === 'rojo' ? semaforo.timerRojo : semaforo.timerVerde)) {
-      semaforo.cambiarColor();
+    if (millis() - this.tiempoUltimoCambio >= (this.estado === 'rojo' ? this.timerRojo : this.timerVerde)) {
+      this.cambiarColor();
       this.tiempoUltimoCambio = millis();
     }
     }
-
+    
+    getEstado(){
+      return this.estado.toString();
+    }
 }
- 
+
