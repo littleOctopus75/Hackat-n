@@ -1,26 +1,17 @@
-.contenedor-estadistica {
-  border: 2px solid #333;
-  padding: 10px;
-  margin-top: 20px;
-  background-color: #f0f0f0;
-  width: 100%;
-  max-width: 600px;
-}
-
-.contenedor-estadistica h2 {
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.contenedor-estadistica p {
-  margin-bottom: 5px;
-}
-
-.contenedor-estadistica ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.contenedor-estadistica li {
-  margin-bottom: 5px;
-}
+/* Estilo para el contenedor del lienzo de la carretera */
+.contenedor-carretera {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    overflow: hidden; /* Para ocultar cualquier contenido que exceda el tamaño del contenedor */
+    width: 200px;
+    height: 200px;
+  }
+  
+  /* Estilo para el lienzo */
+  #lienzo {
+    border: 2px solid #333; /* Borde para el lienzo */
+  }
+  
