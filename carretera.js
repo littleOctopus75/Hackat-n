@@ -5,7 +5,7 @@ let estadisticas;
 let cuadroConfiguracion;
 
 function setup() {
-  createCanvas(1560, 400); // Lienzo de píxeles
+  createCanvas(1520, 400); // Lienzo de píxeles
   carretera = new Carretera(2060, 10,0,175); // Crear una nueva instancia de Carretera con ancho y divisores
   carretera2 = new Carretera(2060, 10,0,280);
   semaforo = new Semaforo(3000, 2000);
