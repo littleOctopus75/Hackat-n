@@ -14,9 +14,7 @@ class Semaforo {
     } else if (this.estado === 'verde') {
       this.cambioColor('rojo');
     }
-  }
-
- 
+  } 
 
   mostrarsemaforo(){
     //Para controlar las posiciones del semaforo}
@@ -43,7 +41,6 @@ class Semaforo {
     verificar(){
       // Cambia el color del semáforo si ha pasado el tiempo
     if (millis() - this.tiempoUltimoCambio >= (this.estado === 'rojo' ? this.timerRojo : this.timerVerde)) {
-      console.log("entra");
       this.cambiarColor();
       this.tiempoUltimoCambio = millis();
     }
