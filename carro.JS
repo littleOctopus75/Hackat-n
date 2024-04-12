@@ -48,7 +48,7 @@ class Carro {
       let carroAtras = this.carros[i + 1];
       if (carroAtras !== undefined) {
         //verificamos que no coincidan los dos carros
-        if (carroAtras.x + carroAtras.tamaño * 3 >= carroActual.x) {
+        if (carroAtras.x + carroAtras.tamaño * 4 >= carroActual.x) {
           //alert("si entra en colision");
           carroAtras.banderaParar = true;
         } else {
@@ -76,6 +76,20 @@ class Carro {
       } else {
         carroActual.tiempoEspera=millis();
       }
+    }
+  }
+
+  moverAdelante() {
+    this.x += this.velocidad;
+    if (this.x > width) {
+      this.x = 0;
+    }
+  }
+
+  moverAtras() {
+    this.x -= this.velocidad;
+    if (this.x < 0) {
+      this.x = width;
     }
   }
 }
