@@ -14,7 +14,9 @@ class CuadroConfiguracion {
     this.tiempoRojoInput.position(1300, 210);
 
     this.boton = createButton("Actualizar");
-    this.boton.position(1300, 260);
+    this.boton.style('width', '150px'); 
+    this.boton.style('height', '30px'); 
+    this.boton.position(1310, 260);
     this.boton.mousePressed(() => this.actualizarConfiguracion()); // Asociar función al botón
   }
 
@@ -27,13 +29,13 @@ class CuadroConfiguracion {
     this.semaforo.setTiempoVerde(tiempoVerdeSegundos);
     this.semaforo.setTiempoRojo(tiempoRojoSegundos);
     this.carretera.setIntervalosCarro(frecuenciaSegundos);
-}
+  }
 
 
   mostrarConfiguraciones() {
     text("Configuraciones semáforo: ", 780, 62);
-   text("S",1200, 62);
-   text("S",1480, 62);
+    text("S", 1200, 62);
+    text("S", 1480, 62);
 
     text("Tiempo Verde", 1120, 35);
     text("Tiempo Rojo", 1315, 35);
