@@ -1,30 +1,28 @@
 class Estadisticas {
-  constructor(semaforo) {
-    this.carros=[];
-    this.semaforo=semaforo;
+
+  constructor(x, y, carretera) {
     this.tiempoTotalEspera = 0;
     this.esperaPromedio = 0;
-    this.vehiculosCalle1 = 0;
-    this.vehiculosCalle2 = 0;
+    this.posicionX = x;
+    this.posicionY = y;
+    this.carros = []; // Inicializar como un arreglo vacío
+    this.carretera = carretera
   }
 
-  setTotalCarros(carros){
-   this.carros.push(carros); // Agrega un carro al arreglo carros
-  }
+  mostrarEstadisticas(CarCarros) {
+    for (let carro of CarCarros) {
+      this.tiempoTotalEspera += carro.getTiempoEsperaTotal();
+      
+    }
+    this.tiempoTotalEspera = round(this.tiempoTotalEspera * 100) / 100; // Redondear a dos decimales
+    this.esperaPromedio = this.tiempoTotalEspera / this.carretera.cantidadCarros;
 
-  mostrarEstadisticas() {
-    for (let carro of this.carros) {
-            this.tiempoTotalEspera+=carro.getTiempoEsperaTotal();
-      }
-      this.tiempoTotalEspera = round(this.tiempoTotalEspera * 100) / 100; // Redondear a dos decimales
-      this.esperaPromedio=this.tiempoTotalEspera/this.carros.length;
-    //this.tiempoTotalEspera=this.semaforo.getTimerRojo();
     fill(0);
     textSize(16);
-    text("Calle 1",10, 15);
-    text("Tiempo total de espera: " + this.tiempoTotalEspera + " segundos", 10, 35);
-    text("Espera promedio: " + this.esperaPromedio + " segundos", 10, 55);
-    text("Vehículos en Calle 1: " + this.carros.length, 10, 75);
+    text("Calle " + this.carretera.nombre, this.posicionX, this.posicionY);
+    text("Tiempo total de espera: " + this.tiempoTotalEspera + " segundos", this.posicionX, this.posicionY + 20);
+    text("Espera promedio: " + this.esperaPromedio + " segundos", this.posicionX, this.posicionY + 40);
+    text("Vehículos en Calle "+ this.carretera.nombre + ": " + this.carretera.cantidadCarros, this.posicionX, this.posicionY + 60);
   }
- 
 }
+

@@ -3,14 +3,16 @@ let carretera2;
 let semaforo;
 let estadisticas;
 let cuadroConfiguracion;
-
+let estadisticas2;
 function setup() {
-  createCanvas(1560, 400); // Lienzo de píxeles
-  carretera = new Carretera(2060, 10,0,175); // Crear una nueva instancia de Carretera con ancho y divisores
-  carretera2 = new Carretera(2060, 10,0,280);
+  createCanvas(1560, 450); // Lienzo de píxeles
+  carretera = new Carretera(2060, 10,0,175,"1"); // Crear una nueva instancia de Carretera con ancho y divisores
+  carretera2 = new Carretera(2060, 10,0,280,"2");
   semaforo = new Semaforo(3000, 2000);
-  estadisticas = new Estadisticas(semaforo);
+  estadisticas = new Estadisticas(10 , 15, carretera);
+  estadisticas2 = new Estadisticas(10 , 370, carretera2);
   cuadroConfiguracion = new CuadroConfiguracion(semaforo, carretera);
+
 }
 
 function draw() {
@@ -20,13 +22,16 @@ function draw() {
   carretera.actualizar();
   carretera2.actualizar();
   semaforo.mostrarsemaforo();
-  estadisticas.mostrarEstadisticas();
+  estadisticas.mostrarEstadisticas(carretera.carros);
+  estadisticas2.mostrarEstadisticas(carretera2.carros);
   cuadroConfiguracion.mostrarConfiguraciones();
+  console.log("hola")
+
 }
 
 
 class Carretera {
-  constructor(ancho, numDivisores,x,y) {
+  constructor(ancho, numDivisores,x,y, nombre) {
     this.ancho = ancho;
     this.x=x;
     this.y=y;
@@ -37,6 +42,8 @@ class Carretera {
     this.tamañoCarro = 30; // Tamaño de los carros
     this.tiempoUltimoCarro = 0; // Tiempo en milisegundos del último carro generado
     this.maxCarros = 10; // Máximo de carros permitidos
+    this.nombre= nombre;
+    this.cantidadCarros = 0;
   }
   setIntervalosCarro(valor) {
     this.intervaloCarros = valor;
@@ -73,7 +80,8 @@ class Carretera {
           semaforo,
           this.carros
         ); 
-        estadisticas.setTotalCarros(nuevoCarro);
+        this.cantidadCarros++;
+        // estadisticas.setTotalCarros(nuevoCarro);
         this.verificarSobreposicion(nuevoCarro);
         this.tiempoUltimoCarro = millis() + random(2000, 4000); // Intervalo de tiempo aleatorio entre 2 y 5 segundos para el próximo carro
       }
