@@ -2,9 +2,9 @@ let carretera; // Variable para la instancia de la carretera
 let semaforo;
 
 function setup() {
-  createCanvas(1460, 200); // Lienzo de píxeles
-  carretera = new Carretera(1450, 10); // Crear una nueva instancia de Carretera con ancho y divisores
-  semaforo = new Semaforo(1000, 500); // Ejemplo: verde 2 segundos, rojo 1 segundo
+  createCanvas(2060, 400); // Lienzo de píxeles
+  carretera = new Carretera(2060, 10); // Crear una nueva instancia de Carretera con ancho y divisores
+  semaforo = new Semaforo(3000, 8000); 
 }
 
 function draw() {
@@ -42,7 +42,7 @@ class Carretera {
      for (let carro of this.carros) {
       if (carro.x <= width) {
         carro.dibujar();
-        carro.avanzar();
+        //carro.avanzar();
       }
     }
   }
@@ -52,19 +52,20 @@ class Carretera {
     // Generar carros aleatorios en posición y tiempo
     if (millis() - this.tiempoUltimoCarro > this.intervaloCarros) {
       if(this.carros.length < this.maxCarros){
-        let nuevoCarro = new Carro(0, 80, this.tamañoCarro); // Posición X fija en 0
+        let nuevoCarro = new Carro(0, 180, this.tamañoCarro, semaforo, this.carros); // Posición X fija en 0
         this.verificarSobreposicion(nuevoCarro);
         this.tiempoUltimoCarro = millis() + random(2000, 4000); // Intervalo de tiempo aleatorio entre 2 y 5 segundos para el próximo carro
       }
+
     }
 
     if (this.carros.length > 0 && this.carros[0].x > 1400) {
       this.carros.shift(); // Eliminar primer carro de la cola
     }
-    console.log(this.carros.length)
   }
   
   verificarSobreposicion(nuevoCarro) {
+
   // Verificar que el nuevo carro no se sobreponga con el último carro generado
   let ultimoCarro = this.carros[this.carros.length - 1];
   if (ultimoCarro) {
@@ -84,4 +85,5 @@ class Carretera {
   // Si no se sobreponen, agregar el nuevo carro
   this.carros.push(nuevoCarro);
   }
+  
 }
