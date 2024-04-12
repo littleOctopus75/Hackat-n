@@ -3,6 +3,7 @@ let carretera2;
 let semaforo;
 let estadisticas;
 let cuadroConfiguracion;
+let estadisticas2;
 
 function setup() {
   createCanvas(1560, 400); // Lienzo de píxeles
@@ -10,7 +11,8 @@ function setup() {
   carretera2 = new Carretera(2060, 10, 0, 280, "derecha");
   carretera.intervaloCarros=1;
   semaforo = new Semaforo(3000, 2000);
-  estadisticas = new Estadisticas(semaforo);
+  estadisticas = new Estadisticas(10 , 15, carretera);
+  estadisticas2 = new Estadisticas(10 , 370, carretera2);
   cuadroConfiguracion = new CuadroConfiguracion(semaforo, carretera);
 }
 
@@ -21,7 +23,8 @@ function draw() {
   carretera.actualizar();
   carretera2.actualizar();
   semaforo.mostrarsemaforo();
-  estadisticas.mostrarEstadisticas();
+  estadisticas.mostrarEstadisticas(carretera.carros);
+  estadisticas2.mostrarEstadisticas(carretera2.carros);
   cuadroConfiguracion.mostrarConfiguraciones();
 }
 
@@ -38,10 +41,12 @@ class Carretera {
     this.numDivisores = numDivisores;
     this.espacioEntreDivisores = this.ancho / this.numDivisores;
     this.carros = []; // Array para almacenar los carros
-    this.intervaloCarros = 5; // Intervalo en milisegundos para generar carros
+    this.intervaloCarros = 1500; // Intervalo en milisegundos para generar carros
     this.tamañoCarro = 30; // Tamaño de los carros
     this.tiempoUltimoCarro = 0; // Tiempo en milisegundos del último carro generado
     this.maxCarros = 10; // Máximo de carros permitidos
+    this.nombre= nombre;
+    this.cantidadCarros = 0;
   }
   setIntervalosCarro(valor) {
     this.intervaloCarros = valor;
@@ -101,7 +106,8 @@ class Carretera {
         estadisticas.setTotalCarros(this.carros);
 
         this.verificarSobreposicion(nuevoCarro);
-        this.tiempoUltimoCarro = millis() + random(2000, 4000); // Intervalo de tiempo aleatorio entre 2 y 5 segundos para el próximo carro
+        // console.log(this.carros.length)
+        this.tiempoUltimoCarro = millis() + random(1000, 3000); // Intervalo de tiempo aleatorio entre 2 y 5 segundos para el próximo carro
       }
     }
 

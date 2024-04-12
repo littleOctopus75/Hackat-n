@@ -100,13 +100,16 @@ class Carro {
           carroActual.x > 650
         ) {
           carroActual.x += carroActual.velocidad;
-          if (carroActual.x > width) {
-            carroActual.x = 0;
-          }
-          carroActual.tiempoEspera = 0;
-        } else {
-          carroActual.tiempoEspera = millis();
-        }
+
+        
+          // if (carroActual.x > width) {
+          //   carroActual.x = 0;
+          // }
+          carroActual.tiempoEspera=0;
+          // console.log(carroActual.x);
+      } else {
+        carroActual.tiempoEspera=millis();
+
       }
     }
   }
