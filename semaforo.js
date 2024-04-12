@@ -43,13 +43,14 @@ class Semaforo {
     verificar(){
       // Cambia el color del semáforo si ha pasado el tiempo
     if (millis() - this.tiempoUltimoCambio >= (this.estado === 'rojo' ? this.timerRojo : this.timerVerde)) {
+      console.log("entra");
       this.cambiarColor();
       this.tiempoUltimoCambio = millis();
     }
     }
     
     getEstado(){
-      return this.estado.toString();
+      return this.estado;
     }
 }
 
