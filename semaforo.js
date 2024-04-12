@@ -15,7 +15,12 @@ class Semaforo {
       this.cambioColor('rojo');
     }
   } 
-
+  setTiempoVerde(valor){
+    this.timerVerde=valor;
+  }
+  setTiempoRojo(valor){
+    this.timerRojo=valor;
+  }
   mostrarsemaforo(){
     //Para controlar las posiciones del semaforo}
     
