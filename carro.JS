@@ -6,6 +6,7 @@ class Carro {
     this.y = y;
     this.sentido = sentido;
     this.tiempoEspera = 0;
+    this.tiempoAcelerar=100;
 
     //objeto semaforo que servirá para monitorear el cambio de color del semaforo
     semaforo = semaforo;
@@ -56,7 +57,7 @@ class Carro {
           if (carroAtras2.x - carroAtras2.tamaño * 4 <= carroActual2.x) {
             carroAtras2.banderaParar = true;
           } else {
-            if (carroAtras2.x - carroAtras2.tamaño * 4 > carroActual2.x) {
+            if (carroAtras2.x - carroAtras2.tamaño * 5 > carroActual2.x) {
               carroAtras2.banderaParar = false;
             }
           }
@@ -79,6 +80,7 @@ class Carro {
       }
     } else {
       for (let i = 0; i < this.carros.length; i++) {
+        let acumulador = this.carros.length*3;
         let carroActual = this.carros[i];
         let carroAtras = this.carros[i + 1];
         if (carroAtras !== undefined) {
@@ -99,8 +101,10 @@ class Carro {
             carroActual.banderaParar === false) ||
           carroActual.x > 650
         ) {
-          carroActual.x += carroActual.velocidad;
-
+          
+          carroActual.x += carroActual.velocidad+acumulador;
+          acumulador-=4;
+          
         
           // if (carroActual.x > width) {
           //   carroActual.x = 0;
