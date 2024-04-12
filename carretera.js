@@ -1,10 +1,13 @@
 let carretera; // Variable para la instancia de la carretera
+let carretera2;
 let semaforo;
 let estadisticas;
 let cuadroConfiguracion;
+
 function setup() {
-  createCanvas(2060, 400); // Lienzo de píxeles
-  carretera = new Carretera(2060, 10); // Crear una nueva instancia de Carretera con ancho y divisores
+  createCanvas(1560, 400); // Lienzo de píxeles
+  carretera = new Carretera(2060, 10,0,175); // Crear una nueva instancia de Carretera con ancho y divisores
+  carretera2 = new Carretera(2060, 10,0,280);
   semaforo = new Semaforo(3000, 2000);
   estadisticas = new Estadisticas(semaforo);
   cuadroConfiguracion = new CuadroConfiguracion(semaforo, carretera);
@@ -13,15 +16,19 @@ function setup() {
 function draw() {
   background(200); // Fondo blanco
   carretera.mostrar();
+  carretera2.mostrar();
   carretera.actualizar();
+  carretera2.actualizar();
   semaforo.mostrarsemaforo();
   estadisticas.mostrarEstadisticas();
   cuadroConfiguracion.mostrarConfiguraciones();
 }
 
 class Carretera {
-  constructor(ancho, numDivisores) {
+  constructor(ancho, numDivisores,x,y) {
     this.ancho = ancho;
+    this.x=x;
+    this.y=y;
     this.numDivisores = numDivisores;
     this.espacioEntreDivisores = this.ancho / this.numDivisores;
     this.carros = []; // Array para almacenar los carros
@@ -37,18 +44,13 @@ class Carretera {
     // Dibujar la carretera (rectángulo gris)
     fill(150);
     noStroke();
-    rect(0, height / 2 - 30, width, 60);
+    rect(this.x, this.y, width, 60);
 
     // Dibujar líneas divisorias (líneas blancas)
     stroke(255);
     strokeWeight(2);
     for (let i = 1; i < this.numDivisores; i++) {
-      line(
-        i * this.espacioEntreDivisores,
-        height / 2 - 15,
-        i * this.espacioEntreDivisores,
-        height / 2 + 15
-      );
+        line(i * this.espacioEntreDivisores,this.y,i * this.espacioEntreDivisores, this.y+50);
     }
 
     for (let carro of this.carros) {
@@ -64,12 +66,12 @@ class Carretera {
     if (millis() - this.tiempoUltimoCarro > this.intervaloCarros) {
       if (this.carros.length < this.maxCarros) {
         let nuevoCarro = new Carro(
-          0,
-          180,
+          this.x,
+          this.y,
           this.tamañoCarro,
           semaforo,
           this.carros
-        ); // Posición X fija en 0
+        ); 
         estadisticas.setTotalCarros(this.carros);
         this.verificarSobreposicion(nuevoCarro);
         this.tiempoUltimoCarro = millis() + random(2000, 4000); // Intervalo de tiempo aleatorio entre 2 y 5 segundos para el próximo carro
