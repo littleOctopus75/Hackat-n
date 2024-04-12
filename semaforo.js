@@ -7,6 +7,13 @@ class Semaforo {
   cambioColor(estado) {
     this.estado = estado;
   }
+  cambiarColor() {
+    if (this.estado === 'rojo') {
+      this.cambioColor('verde');
+    } else if (this.estado === 'verde') {
+      this.cambioColor('rojo');
+    }
+  }
 
 }
 
@@ -19,32 +26,29 @@ function setup() {
 }
 
 function draw() {
-  var posicionesX=190;
-  var posicionesY=5;
-  background(255);
-  // Dibuja el semáforo
-  stroke(0);
-  fill(255);
-  rect(posicionesX, posicionesY, 50, 150);
-  line(posicionesX+25, posicionesY+150, posicionesX+25, 300);
-
-  fill(semaforo.estado === 'verde' ?  color(0, 255, 0):color(255, 255, 255) );
-  ellipse(posicionesX+25, posicionesY+30, 50, 50);
-
-  fill(semaforo.estado === 'rojo' ? color(255, 0, 0) : color(255,255,255));
-  ellipse(posicionesX+25, posicionesY+110, 50, 50);
-
-  // Cambia el color del semáforo si ha pasado el tiempo
-  if (millis() - tiempoUltimoCambio >= (semaforo.estado === 'rojo' ? semaforo.timerRojo : semaforo.timerVerde)) {
-    cambiarColor();
-    tiempoUltimoCambio = millis();
-  }
+  mostrarSemaforo();
 }
 
-function cambiarColor() {
-  if (semaforo.estado === 'rojo') {
-    semaforo.cambioColor('verde');
-  } else if (semaforo.estado === 'verde') {
-    semaforo.cambioColor('rojo');
-  }
+function mostrarSemaforo(){
+//Para controlar las posiciones del semaforo
+var posicionesX=190;
+var posicionesY=5;
+background(255);
+// Dibuja el semáforo
+stroke(0);
+fill(255);
+rect(posicionesX, posicionesY, 50, 150);
+line(posicionesX+25, posicionesY+150, posicionesX+25, 300);
+
+fill(semaforo.estado === 'verde' ?  color(0, 255, 0):color(255, 255, 255) );
+ellipse(posicionesX+25, posicionesY+30, 50, 50);
+
+fill(semaforo.estado === 'rojo' ? color(255, 0, 0) : color(255,255,255));
+ellipse(posicionesX+25, posicionesY+110, 50, 50);
+
+// Cambia el color del semáforo si ha pasado el tiempo
+if (millis() - tiempoUltimoCambio >= (semaforo.estado === 'rojo' ? semaforo.timerRojo : semaforo.timerVerde)) {
+  semaforo.cambiarColor();
+  tiempoUltimoCambio = millis();
+}
 }

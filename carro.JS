@@ -1,23 +1,6 @@
 
 let miCarro;
 
-// function setup() {
-//   createCanvas(400, 200);
-//   miCarro = new Carro(50, 100, 30);
-//   miCarro2 = new Carro(20, 150, 30);
-
-// }
-
-// function draw() {
-//   background(220);
-  
-//   // Dibuja el carro
-//   miCarro.dibujar();
-//   miCarro2.dibujar();
-  
-//   // Actualiza la posición del carro
-//   miCarro.avanzar();
-// }
 
 class Carro {
   constructor(x, y, tamaño) {
