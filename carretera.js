@@ -4,6 +4,7 @@ let semaforo;
 let estadisticas;
 let cuadroConfiguracion;
 let estadisticas2;
+
 function setup() {
   createCanvas(1560, 450); // Lienzo de píxeles
   carretera = new Carretera(2060, 10,0,175,"1"); // Crear una nueva instancia de Carretera con ancho y divisores
@@ -12,7 +13,6 @@ function setup() {
   estadisticas = new Estadisticas(10 , 15, carretera);
   estadisticas2 = new Estadisticas(10 , 370, carretera2);
   cuadroConfiguracion = new CuadroConfiguracion(semaforo, carretera);
-
 }
 
 function draw() {
@@ -25,8 +25,6 @@ function draw() {
   estadisticas.mostrarEstadisticas(carretera.carros);
   estadisticas2.mostrarEstadisticas(carretera2.carros);
   cuadroConfiguracion.mostrarConfiguraciones();
-  console.log("hola")
-
 }
 
 
@@ -38,7 +36,7 @@ class Carretera {
     this.numDivisores = numDivisores;
     this.espacioEntreDivisores = this.ancho / this.numDivisores;
     this.carros = []; // Array para almacenar los carros
-    this.intervaloCarros = 1000; // Intervalo en milisegundos para generar carros
+    this.intervaloCarros = 1500; // Intervalo en milisegundos para generar carros
     this.tamañoCarro = 30; // Tamaño de los carros
     this.tiempoUltimoCarro = 0; // Tiempo en milisegundos del último carro generado
     this.maxCarros = 10; // Máximo de carros permitidos
@@ -62,7 +60,7 @@ class Carretera {
     }
 
     for (let carro of this.carros) {
-      if (carro.x <= width) {
+      if (carro.x < width) {
         carro.dibujar();
         //carro.avanzar();
       }
@@ -81,13 +79,14 @@ class Carretera {
           this.carros
         ); 
         this.cantidadCarros++;
-        // estadisticas.setTotalCarros(nuevoCarro);
         this.verificarSobreposicion(nuevoCarro);
-        this.tiempoUltimoCarro = millis() + random(2000, 4000); // Intervalo de tiempo aleatorio entre 2 y 5 segundos para el próximo carro
+        // console.log(this.carros.length)
+        this.tiempoUltimoCarro = millis() + random(1000, 3000); // Intervalo de tiempo aleatorio entre 2 y 5 segundos para el próximo carro
       }
     }
 
-    if (this.carros.length > 0 && this.carros[0].x > 1400) {
+     // Eliminar primer carro de la cola si sale del canvas
+     if (this.carros.length > 0 && this.carros[0].x > width) {
       this.carros.shift(); // Eliminar primer carro de la cola
     }
   }

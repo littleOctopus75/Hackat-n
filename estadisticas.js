@@ -5,14 +5,12 @@ class Estadisticas {
     this.esperaPromedio = 0;
     this.posicionX = x;
     this.posicionY = y;
-    this.carros = []; // Inicializar como un arreglo vacío
     this.carretera = carretera
   }
 
   mostrarEstadisticas(CarCarros) {
     for (let carro of CarCarros) {
       this.tiempoTotalEspera += carro.getTiempoEsperaTotal();
-      
     }
     this.tiempoTotalEspera = round(this.tiempoTotalEspera * 100) / 100; // Redondear a dos decimales
     this.esperaPromedio = this.tiempoTotalEspera / this.carretera.cantidadCarros;

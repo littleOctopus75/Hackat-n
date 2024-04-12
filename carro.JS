@@ -69,10 +69,11 @@ class Carro {
         //carroActual.avanzar();
         
           carroActual.x += carroActual.velocidad;
-          if (carroActual.x > width) {
-            carroActual.x = 0;
-          }
+          // if (carroActual.x > width) {
+          //   carroActual.x = 0;
+          // }
           carroActual.tiempoEspera=0;
+          // console.log(carroActual.x);
       } else {
         carroActual.tiempoEspera=millis();
       }
