@@ -53,7 +53,7 @@ class Carro {
         let carroActual2 = this.carros[i];
         let carroAtras2 = this.carros[i + 1];
         if (carroAtras2 !== undefined) {
-          if (carroAtras2.x - carroAtras2.tamaño * 3 <= carroActual2.x) {
+          if (carroAtras2.x - carroAtras2.tamaño * 4 <= carroActual2.x) {
             carroAtras2.banderaParar = true;
           } else {
             if (carroAtras2.x - carroAtras2.tamaño * 4 > carroActual2.x) {
@@ -82,7 +82,7 @@ class Carro {
         let carroActual = this.carros[i];
         let carroAtras = this.carros[i + 1];
         if (carroAtras !== undefined) {
-          if (carroAtras.x + carroAtras.tamaño * 3 >= carroActual.x) {
+          if (carroAtras.x + carroAtras.tamaño * 4 >= carroActual.x) {
             carroAtras.banderaParar = true;
           } else {
             if (carroAtras.x + carroAtras.tamaño * 4 < carroActual.x) {
@@ -112,19 +112,6 @@ class Carro {
 
       }
     }
-  }
-
-  moverAdelante() {
-    this.x += this.velocidad;
-    if (this.x > width) {
-      this.x = 0;
-    }
-  }
-
-  moverAtras() {
-    this.x -= this.velocidad;
-    if (this.x < 0) {
-      this.x = width;
     }
   }
 }

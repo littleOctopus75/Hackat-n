@@ -6,9 +6,9 @@ let cuadroConfiguracion;
 let estadisticas2;
 
 function setup() {
-  createCanvas(1560, 400); // Lienzo de píxeles
-  carretera = new Carretera(2060, 10, 0, 175, "izquierda"); // Crear una nueva instancia de Carretera con ancho y divisores
-  carretera2 = new Carretera(2060, 10, 0, 280, "derecha");
+  createCanvas(1560, 450); // Lienzo de píxeles
+  carretera = new Carretera(2060, 10, 0, 175, "izquierda","Av.Oaxaca"); // Crear una nueva instancia de Carretera con ancho y divisores
+  carretera2 = new Carretera(2060, 10, 0, 280, "derecha", "andador");
   carretera.intervaloCarros=1;
   semaforo = new Semaforo(3000, 2000);
   estadisticas = new Estadisticas(10 , 15, carretera);
@@ -30,7 +30,7 @@ function draw() {
 
 
 class Carretera {
-  constructor(ancho, numDivisores, x, y, sentido) {
+  constructor(ancho, numDivisores, x, y, sentido, nombre) {
     this.ancho = ancho;
     this.sentido = sentido;
     if (this.sentido === "izquierda") {
@@ -102,8 +102,8 @@ class Carretera {
             this.sentido
           );
         }
-
-        estadisticas.setTotalCarros(this.carros);
+        this.cantidadCarros++;
+        // estadisticas.setTotalCarros(this.carros);
 
         this.verificarSobreposicion(nuevoCarro);
         // console.log(this.carros.length)
