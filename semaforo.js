@@ -33,7 +33,7 @@ class Semaforo {
     stroke(0);
     fill(255);
     rect(posicionesX, posicionesY, ancho, largo);
-    line(posicionesX+22, posicionesY+120, posicionesX+22, 170);
+    line(posicionesX+22, posicionesY+120, posicionesX+22, 255);
     
     fill(this.estado === 'verde' ?  color(0, 255, 0):color(255, 255, 255) );
     ellipse(posicionesX+20, posicionesY+30, ancho, ancho);
