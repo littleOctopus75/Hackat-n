@@ -24,6 +24,7 @@ function draw() {
   cuadroConfiguracion.mostrarConfiguraciones();
 }
 
+
 class Carretera {
   constructor(ancho, numDivisores,x,y) {
     this.ancho = ancho;
@@ -72,7 +73,7 @@ class Carretera {
           semaforo,
           this.carros
         ); 
-        estadisticas.setTotalCarros(this.carros);
+        estadisticas.setTotalCarros(nuevoCarro);
         this.verificarSobreposicion(nuevoCarro);
         this.tiempoUltimoCarro = millis() + random(2000, 4000); // Intervalo de tiempo aleatorio entre 2 y 5 segundos para el próximo carro
       }
@@ -89,7 +90,6 @@ class Carretera {
     if (ultimoCarro) {
       // Considerar la distancia horizontal y vertical entre los carros
       let distanciaHorizontal = abs(nuevoCarro.x - ultimoCarro.x);
-      console.log(distanciaHorizontal);
 
       // Si la distancia horizontal es menor que el ancho combinado de los carros
       // y la distancia vertical es menor que el alto combinado de los carros,
@@ -99,7 +99,6 @@ class Carretera {
         return;
       }
     }
-
     // Si no se sobreponen, agregar el nuevo carro
     this.carros.push(nuevoCarro);
   }
