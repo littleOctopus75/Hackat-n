@@ -4,7 +4,7 @@ let semaforo;
 function setup() {
   createCanvas(2060, 400); // Lienzo de píxeles
   carretera = new Carretera(2060, 10); // Crear una nueva instancia de Carretera con ancho y divisores
-  semaforo = new Semaforo(3000, 5000); // Ejemplo: verde 2 segundos, rojo 1 segundo
+  semaforo = new Semaforo(3000, 2000); // Ejemplo: verde 2 segundos, rojo 1 segundo
 }
 
 function draw() {
@@ -42,7 +42,7 @@ class Carretera {
      for (let carro of this.carros) {
       if (carro.x <= width) {
         carro.dibujar();
-        carro.avanzar();
+        //carro.avanzar();
       }
     }
   }
@@ -50,10 +50,9 @@ class Carretera {
 
   actualizar() {
     // Generar carros aleatorios en posición y tiempo
-
     if (millis() - this.tiempoUltimoCarro > this.intervaloCarros) {
       if(this.carros.length < this.maxCarros){
-        let nuevoCarro = new Carro(0, 180, this.tamañoCarro, semaforo); // Posición X fija en 0
+        let nuevoCarro = new Carro(0, 180, this.tamañoCarro, semaforo, this.carros); // Posición X fija en 0
         this.verificarSobreposicion(nuevoCarro);
         this.tiempoUltimoCarro = millis() + random(2000, 4000); // Intervalo de tiempo aleatorio entre 2 y 5 segundos para el próximo carro
       }
@@ -86,4 +85,5 @@ class Carretera {
   // Si no se sobreponen, agregar el nuevo carro
   this.carros.push(nuevoCarro);
   }
+  
 }
