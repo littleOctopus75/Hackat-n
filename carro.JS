@@ -80,7 +80,6 @@ class Carro {
       }
     } else {
       for (let i = 0; i < this.carros.length; i++) {
-        let acumulador = this.carros.length*3;
         let carroActual = this.carros[i];
         let carroAtras = this.carros[i + 1];
         if (carroAtras !== undefined) {
@@ -101,10 +100,8 @@ class Carro {
             carroActual.banderaParar === false) ||
           carroActual.x > 650
         ) {
-          
-          carroActual.x += carroActual.velocidad+acumulador;
-          acumulador-=4;
-          
+          carroActual.x += carroActual.velocidad;
+
         
           // if (carroActual.x > width) {
           //   carroActual.x = 0;
@@ -119,3 +116,4 @@ class Carro {
     }
   }
 }
+
